@@ -18,7 +18,7 @@ router.delete('/delete/:id',adminAuth,deleteOneData)
 router.delete('/delete_all_student',adminAuth,deleteAllData)
 router.delete('/login_out',loginOut)
 router.post('/add_bonus/:id',adminAuth,add_bouns)
-router.put('edit_bonus/:id/:award_id',adminAuth, edit_bonus);
+router.put('/edit_bonus/:id/:award_id',adminAuth, edit_bonus);
 router.delete('/delete_bonus/:id/:award_id',adminAuth, delete_bonus);
 router.patch('/change_password',changePassword)
 
