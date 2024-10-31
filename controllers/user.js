@@ -61,7 +61,7 @@ const Login = async (req, res) => {
     user.tokens.push(token);
     await user.save();
 
-    res.status(200).send({ access_token: token, success: "Login is successful!" });
+    res.status(200).send({ access_token: token, success: "Login is successful!",admin:user.isAdmin });
   } catch (error) {
     res.status(500).send(error.message);
   }
