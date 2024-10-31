@@ -190,70 +190,77 @@ const loginOut = async (req, res) => {
   }
 };
 
-const add_bouns=async(req,res)=>{
-  
-        try {
-         const user_id=req.params.id
-         const bonusAmount=req.body.bonus
-         const date =req.body.date
-
-            const user = await User.findById(user_id);
-            if (!user) {
-             return res.status(404).send('not found');
-
-            }
-    
-           
-            const hours = bonusAmount * 5;
-    
-            
-            user.rewards.push({
-                NO_bouns: bonusAmount,
-                NO_hours: `${hours} hours`,
-                date: date 
-            });
-    
-        
-            await user.save();
-    
-            res.status(200).send(`Bonus added successfully to user ${user.FirstName}`);
-        } catch (error) {
-          res.status(500).send(error.message);
-        }
+function formatHours(minutes) {
+    if (minutes < 60) {
+        return `${minutes} دقيقة`;
+    } else {
+        const hours = Math.floor(minutes / 60);
+        const remainingMinutes = minutes % 60;
+        return remainingMinutes > 0 ? `${hours} ساعة و ${remainingMinutes} دقيقة` : `${hours} ساعة`;
     }
-    
+}
+
+      
+const add_bouns = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const bonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('not found');
+        }
+
+        const minutes = bonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        user.rewards.push({
+            NO_bouns: bonusAmount,
+            NO_hours: formattedTime,
+            date: date
+        });
+
+        await user.save();
+
+        res.status(200).send(`Bonus added successfully to user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
 
     const edit_bonus = async (req, res) => {
-      try {
-          const user_id = req.params.id;
-          const award_id = req.params.award_id;
-          const newBonusAmount = req.body.bonus;
-          const date =req.body.date
-  
-          const user = await User.findById(user_id);
-          if (!user) {
-              return res.status(404).send('User not found');
-          }
-  
-         
-          const bonus = user.rewards.find(reward => reward._id.toString() === award_id);
-          if (!bonus) {
-              return res.status(404).send('Bonus not found');
-          }
-  
-          const hours = newBonusAmount * 5;
-  
-     
-          bonus.NO_bouns = newBonusAmount;
-          bonus.NO_hours = `${hours} hours`;
-          bonus.date = date
-  
-          await user.save();
-          res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
-      } catch (error) {
-          res.status(500).send(error.message);
-      }
-  };
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+        const newBonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const bonus = user.rewards.find(reward => reward._id.toString() === award_id);
+        if (!bonus) {
+            return res.status(404).send('Bonus not found');
+        }
+
+        const minutes = newBonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        bonus.NO_bouns = newBonusAmount;
+        bonus.NO_hours = formattedTime;
+        bonus.date = date;
+
+        await user.save();
+        res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
   
 
   const delete_bonus = async (req, res) => {
