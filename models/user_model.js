@@ -27,7 +27,7 @@ var userSchema = new mongoose.Schema({
             }
         }
     },
-    phone:{
+    job_code:{
         type:String,
         required:true,
         trim:true,
