@@ -9,7 +9,7 @@ const Register = async (req, res) => {
   try {
     const user = req.body;
     const dublicatedEmail = await User.findOne({ email: user.email });
-    const dublicatedPhone = await User.findOne({ phone: user.phone });
+    const dublicatedPhone = await User.findOne({ job_code: user.job_code });
 
     if (dublicatedEmail) {
       return res.status(400).send("Email already exist!!");
@@ -32,13 +32,13 @@ const Register = async (req, res) => {
 
 const Login = async (req, res) => {
   try {
-    const { email, password, phone } = req.body;
+    const { email, password, job_code } = req.body;
 
     let user;
     if (email) {
       user = await User.findOne({ email });
-    } else if (phone) {
-      user = await User.findOne({ phone });
+    } else if (job_code) {
+      user = await User.findOne({ job_code });
     }
 
     if (!user) {
