@@ -55,7 +55,52 @@ var userSchema = new mongoose.Schema({
         default:false
     },
 
-   rewards:[
+   echo:[
+    {
+       NO_bouns:{
+        type:Number,
+       },
+       NO_hours:{
+        type:String,
+       },
+       date:{
+        type:String
+        ,}
+    }
+] ,
+    
+
+   presence:[
+    {
+       NO_bouns:{
+        type:Number,
+       },
+       NO_hours:{
+        type:String,
+       },
+       date:{
+        type:String
+        ,}
+    }
+] ,
+    
+
+   readiness:[
+    {
+       NO_bouns:{
+        type:Number,
+       },
+       NO_hours:{
+        type:String,
+       },
+       date:{
+        type:String
+        ,}
+    }
+] ,
+    
+
+   absence:[
     {
        NO_bouns:{
         type:Number,
