@@ -201,7 +201,7 @@ function formatHours(minutes) {
 }
 
       
-const add_bouns = async (req, res) => {
+const add_bouns_echo = async (req, res) => {
     try {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
@@ -215,11 +215,13 @@ const add_bouns = async (req, res) => {
         const minutes = bonusAmount * 5;
         const formattedTime = formatHours(minutes);
 
-        user.rewards.push({
+        user.echo.push({
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
             date: date
         });
+
+      
 
         await user.save();
 
@@ -230,7 +232,7 @@ const add_bouns = async (req, res) => {
 };
 
 
-    const edit_bonus = async (req, res) => {
+    const edit_bonus_echo = async (req, res) => {
     try {
         const user_id = req.params.id;
         const award_id = req.params.award_id;
@@ -242,7 +244,7 @@ const add_bouns = async (req, res) => {
             return res.status(404).send('User not found');
         }
 
-        const bonus = user.rewards.find(reward => reward._id.toString() === award_id);
+        const bonus = user.echo.find(reward => reward._id.toString() === award_id);
         if (!bonus) {
             return res.status(404).send('Bonus not found');
         }
@@ -263,7 +265,7 @@ const add_bouns = async (req, res) => {
 
   
 
-  const delete_bonus = async (req, res) => {
+  const delete_bonus_echo = async (req, res) => {
     try {
         const user_id = req.params.id;
         const award_id = req.params.award_id;
@@ -274,13 +276,13 @@ const add_bouns = async (req, res) => {
         }
 
         
-        const bonusIndex = user.rewards.findIndex(reward => reward._id.toString() === award_id);
+        const bonusIndex = user.echo.findIndex(reward => reward._id.toString() === award_id);
         if (bonusIndex === -1) {
             return res.status(404).send('Bonus not found');
         }
 
      
-        user.rewards.splice(bonusIndex, 1);
+        user.echo.splice(bonusIndex, 1);
 
         await user.save();
         res.status(200).send(`Bonus deleted successfully for user ${user.FirstName}`);
@@ -304,6 +306,275 @@ const changePassword=async(req,res)=>{
 }
 
 
+const add_bouns_presence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const bonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('not found');
+        }
+
+        const minutes = bonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        user.presence.push({
+            NO_bouns: bonusAmount,
+            NO_hours: formattedTime,
+            date: date
+        });
+
+      
+
+        await user.save();
+
+        res.status(200).send(`Bonus added successfully to user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+    const edit_bonus_presence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+        const newBonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const bonus = user.presence.find(reward => reward._id.toString() === award_id);
+        if (!bonus) {
+            return res.status(404).send('Bonus not found');
+        }
+
+        const minutes = newBonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        bonus.NO_bouns = newBonusAmount;
+        bonus.NO_hours = formattedTime;
+        bonus.date = date;
+
+        await user.save();
+        res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+  
+
+  const delete_bonus_presence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        
+        const bonusIndex = user.presence.findIndex(reward => reward._id.toString() === award_id);
+        if (bonusIndex === -1) {
+            return res.status(404).send('Bonus not found');
+        }
+
+     
+        user.presence.splice(bonusIndex, 1);
+
+        await user.save();
+        res.status(200).send(`Bonus deleted successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+const add_bouns_readiness = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const bonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('not found');
+        }
+
+        const minutes = bonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        user.readiness.push({
+            NO_bouns: bonusAmount,
+            NO_hours: formattedTime,
+            date: date
+        });
+
+      
+
+        await user.save();
+
+        res.status(200).send(`Bonus added successfully to user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+    const edit_bonus_readiness = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+        const newBonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const bonus = user.readiness.find(reward => reward._id.toString() === award_id);
+        if (!bonus) {
+            return res.status(404).send('Bonus not found');
+        }
+
+        const minutes = newBonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        bonus.NO_bouns = newBonusAmount;
+        bonus.NO_hours = formattedTime;
+        bonus.date = date;
+
+        await user.save();
+        res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+  
+
+  const delete_bonus_readiness = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        
+        const bonusIndex = user.readiness.findIndex(reward => reward._id.toString() === award_id);
+        if (bonusIndex === -1) {
+            return res.status(404).send('Bonus not found');
+        }
+
+     
+        user.readiness.splice(bonusIndex, 1);
+
+        await user.save();
+        res.status(200).send(`Bonus deleted successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};const add_bouns_absence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const bonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('not found');
+        }
+
+        const minutes = bonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        user.absence.push({
+            NO_bouns: bonusAmount,
+            NO_hours: formattedTime,
+            date: date
+        });
+
+      
+
+        await user.save();
+
+        res.status(200).send(`Bonus added successfully to user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+
+    const edit_bonus_absence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+        const newBonusAmount = req.body.bonus;
+        const date = req.body.date;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        const bonus = user.absence.find(reward => reward._id.toString() === award_id);
+        if (!bonus) {
+            return res.status(404).send('Bonus not found');
+        }
+
+        const minutes = newBonusAmount * 5;
+        const formattedTime = formatHours(minutes);
+
+        bonus.NO_bouns = newBonusAmount;
+        bonus.NO_hours = formattedTime;
+        bonus.date = date;
+
+        await user.save();
+        res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
+  
+
+  const delete_bonus_absence = async (req, res) => {
+    try {
+        const user_id = req.params.id;
+        const award_id = req.params.award_id;
+
+        const user = await User.findById(user_id);
+        if (!user) {
+            return res.status(404).send('User not found');
+        }
+
+        
+        const bonusIndex = user.absence.findIndex(reward => reward._id.toString() === award_id);
+        if (bonusIndex === -1) {
+            return res.status(404).send('Bonus not found');
+        }
+
+     
+        user.absence.splice(bonusIndex, 1);
+
+        await user.save();
+        res.status(200).send(`Bonus deleted successfully for user ${user.FirstName}`);
+    } catch (error) {
+        res.status(500).send(error.message);
+    }
+};
+
 
 module.exports = {
   Register,
@@ -316,10 +587,24 @@ module.exports = {
   adminUser,
   unAdminUser,
   loginOut,
-  add_bouns,
+  add_bouns_echo,
   getMe,
-  edit_bonus,
-  delete_bonus,
-  changePassword
+  edit_bonus_echo,
+  delete_bonus_echo,
+  changePassword,
+  add_bouns_presence,
+  edit_bonus_presence,
+  delete_bonus_presence,
+  add_bouns_absence,
+  edit_bonus_absence,
+  delete_bonus_absence,
+  add_bouns_readiness,
+  edit_bonus_readiness,
+  delete_bonus_readiness,
+  add_bouns_presence,
+  edit_bonus_presence,
+  delete_bonus_presence,
+  
+  
 
 };
