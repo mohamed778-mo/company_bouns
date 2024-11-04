@@ -15,7 +15,7 @@ const Register = async (req, res) => {
       return res.status(400).send("Email already exist!!");
     }
     if (dublicatedPhone) {
-        return res.status(400).send("Phone already exist!!");
+        return res.status(400).send("Job_Code already exist!!");
       }
     const newUser = new User(user);
 
@@ -42,12 +42,12 @@ const Login = async (req, res) => {
     }
 
     if (!user) {
-      return res.status(404).send("EMAIL/PHONE OR PASSWORD NOT CORRECT");
+      return res.status(404).send("EMAIL/CODE OR PASSWORD NOT CORRECT");
     }
 
     const isPasswordValid = await bcryptjs.compare(password, user.password);
     if (!isPasswordValid) {
-      return res.status(404).send("EMAIL/PHONE OR PASSWORD NOT CORRECT");
+      return res.status(404).send("EMAIL/CODE OR PASSWORD NOT CORRECT");
     }
 
     const SECRETKEY = process.env.SECRETKEY;
@@ -78,7 +78,7 @@ const getMe = async (req, res) => {
     }
     res.status(200).send(user);
   } catch (e) {
-    res.status(500).send("Server Error");
+    res.status(500).send(e.message);
   }
 };
 //FOR ADMIN:
