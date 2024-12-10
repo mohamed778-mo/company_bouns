@@ -211,14 +211,15 @@ const add_bouns_echo = async (req, res) => {
         if (!user) {
             return res.status(404).send('not found');
         }
-
+        const name=`${user.FirstName} ${user.LastName}`
         const minutes = bonusAmount * 5;
         const formattedTime = formatHours(minutes);
 
         user.echo.push({
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
-            date: date
+            date: date,
+            name_who_added:name
         });
 
       
@@ -243,7 +244,7 @@ const add_bouns_echo = async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-
+     const name=`${user.FirstName} ${user.LastName}`
         const bonus = user.echo.find(reward => reward._id.toString() === award_id);
         if (!bonus) {
             return res.status(404).send('Bonus not found');
@@ -255,6 +256,7 @@ const add_bouns_echo = async (req, res) => {
         bonus.NO_bouns = newBonusAmount;
         bonus.NO_hours = formattedTime;
         bonus.date = date;
+        bonus.name_who_added=name
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -316,14 +318,15 @@ const add_bouns_presence = async (req, res) => {
         if (!user) {
             return res.status(404).send('not found');
         }
-
+        const name=`${user.FirstName} ${user.LastName}`
         const minutes = bonusAmount * 5;
         const formattedTime = formatHours(minutes);
 
         user.presence.push({
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
-            date: date
+            date: date,
+            name_who_added:name
         });
 
       
@@ -348,7 +351,7 @@ const add_bouns_presence = async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-
+        const name=`${user.FirstName} ${user.LastName}`
         const bonus = user.presence.find(reward => reward._id.toString() === award_id);
         if (!bonus) {
             return res.status(404).send('Bonus not found');
@@ -360,6 +363,7 @@ const add_bouns_presence = async (req, res) => {
         bonus.NO_bouns = newBonusAmount;
         bonus.NO_hours = formattedTime;
         bonus.date = date;
+        bonus.name_who_added=name
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -407,14 +411,15 @@ const add_bouns_readiness = async (req, res) => {
         if (!user) {
             return res.status(404).send('not found');
         }
-
+        const name=`${user.FirstName} ${user.LastName}`
         const minutes = bonusAmount * 5;
         const formattedTime = formatHours(minutes);
 
         user.readiness.push({
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
-            date: date
+            date: date,
+            name_who_added:name
         });
 
       
@@ -439,7 +444,7 @@ const add_bouns_readiness = async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-
+       const name=`${user.FirstName} ${user.LastName}`
         const bonus = user.readiness.find(reward => reward._id.toString() === award_id);
         if (!bonus) {
             return res.status(404).send('Bonus not found');
@@ -451,6 +456,7 @@ const add_bouns_readiness = async (req, res) => {
         bonus.NO_bouns = newBonusAmount;
         bonus.NO_hours = formattedTime;
         bonus.date = date;
+        bonus.name_who_added=name
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -485,7 +491,8 @@ const add_bouns_readiness = async (req, res) => {
     } catch (error) {
         res.status(500).send(error.message);
     }
-};const add_bouns_absence = async (req, res) => {
+};
+const add_bouns_absence = async (req, res) => {
     try {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
@@ -495,14 +502,15 @@ const add_bouns_readiness = async (req, res) => {
         if (!user) {
             return res.status(404).send('not found');
         }
-
+         const name=`${user.FirstName} ${user.LastName}`
         const minutes = bonusAmount * 5;
         const formattedTime = formatHours(minutes);
 
         user.absence.push({
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
-            date: date
+            date: date,
+            name_who_added:name
         });
 
       
@@ -527,7 +535,7 @@ const add_bouns_readiness = async (req, res) => {
         if (!user) {
             return res.status(404).send('User not found');
         }
-
+        const name=`${user.FirstName} ${user.LastName}`
         const bonus = user.absence.find(reward => reward._id.toString() === award_id);
         if (!bonus) {
             return res.status(404).send('Bonus not found');
@@ -539,6 +547,7 @@ const add_bouns_readiness = async (req, res) => {
         bonus.NO_bouns = newBonusAmount;
         bonus.NO_hours = formattedTime;
         bonus.date = date;
+        bonus.name_who_added=name
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
