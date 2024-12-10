@@ -65,7 +65,10 @@ var userSchema = new mongoose.Schema({
        },
        date:{
         type:String
-        ,}
+        },
+       name_who_added:{
+        type:String,
+       }
     }
 ] ,
     
@@ -80,7 +83,10 @@ var userSchema = new mongoose.Schema({
        },
        date:{
         type:String
-        ,}
+        ,},
+       name_who_added:{
+        type:String,
+       }
     }
 ] ,
     
@@ -95,7 +101,10 @@ var userSchema = new mongoose.Schema({
        },
        date:{
         type:String
-        ,}
+        ,},
+       name_who_added:{
+        type:String,
+       }
     }
 ] ,
     
@@ -110,7 +119,10 @@ var userSchema = new mongoose.Schema({
        },
        date:{
         type:String
-        ,}
+        ,},
+       name_who_added:{
+        type:String,
+       }
     }
 ] ,
     passwordChangedAt: {
