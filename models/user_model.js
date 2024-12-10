@@ -68,6 +68,9 @@ var userSchema = new mongoose.Schema({
         },
        name_who_added:{
         type:String,
+       },
+        note:{
+        type:String,
        }
     }
 ] ,
@@ -85,6 +88,9 @@ var userSchema = new mongoose.Schema({
         type:String
         ,},
        name_who_added:{
+        type:String,
+       },
+        note:{
         type:String,
        }
     }
@@ -104,6 +110,9 @@ var userSchema = new mongoose.Schema({
         ,},
        name_who_added:{
         type:String,
+       },
+        note:{
+        type:String,
        }
     }
 ] ,
@@ -121,6 +130,9 @@ var userSchema = new mongoose.Schema({
         type:String
         ,},
        name_who_added:{
+        type:String,
+       },
+        note:{
         type:String,
        }
     }
