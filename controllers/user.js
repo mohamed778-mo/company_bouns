@@ -206,6 +206,8 @@ const add_bouns_echo = async (req, res) => {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
         const date = req.body.date;
+        const note = req.body.note;
+      
 
         const user = await User.findById(user_id);
         if (!user) {
@@ -219,7 +221,8 @@ const add_bouns_echo = async (req, res) => {
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
             date: date,
-            name_who_added:name
+            name_who_added:name,
+            note:note
         });
 
       
@@ -239,6 +242,7 @@ const add_bouns_echo = async (req, res) => {
         const award_id = req.params.award_id;
         const newBonusAmount = req.body.bonus;
         const date = req.body.date;
+      const note = req.body.note;
 
         const user = await User.findById(user_id);
         if (!user) {
@@ -257,6 +261,7 @@ const add_bouns_echo = async (req, res) => {
         bonus.NO_hours = formattedTime;
         bonus.date = date;
         bonus.name_who_added=name
+        bonus.note = note;
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -313,6 +318,7 @@ const add_bouns_presence = async (req, res) => {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
         const date = req.body.date;
+      const note = req.body.note;
 
         const user = await User.findById(user_id);
         if (!user) {
@@ -326,7 +332,8 @@ const add_bouns_presence = async (req, res) => {
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
             date: date,
-            name_who_added:name
+            name_who_added:name,
+            note:note
         });
 
       
@@ -346,7 +353,7 @@ const add_bouns_presence = async (req, res) => {
         const award_id = req.params.award_id;
         const newBonusAmount = req.body.bonus;
         const date = req.body.date;
-
+        const note = req.body.note;
         const user = await User.findById(user_id);
         if (!user) {
             return res.status(404).send('User not found');
@@ -364,6 +371,7 @@ const add_bouns_presence = async (req, res) => {
         bonus.NO_hours = formattedTime;
         bonus.date = date;
         bonus.name_who_added=name
+        bonus.note=note
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -406,7 +414,7 @@ const add_bouns_readiness = async (req, res) => {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
         const date = req.body.date;
-
+        const note = req.body.note;
         const user = await User.findById(user_id);
         if (!user) {
             return res.status(404).send('not found');
@@ -419,7 +427,8 @@ const add_bouns_readiness = async (req, res) => {
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
             date: date,
-            name_who_added:name
+            name_who_added:name,
+           note:note
         });
 
       
@@ -439,7 +448,7 @@ const add_bouns_readiness = async (req, res) => {
         const award_id = req.params.award_id;
         const newBonusAmount = req.body.bonus;
         const date = req.body.date;
-
+        const note = req.body.note;
         const user = await User.findById(user_id);
         if (!user) {
             return res.status(404).send('User not found');
@@ -457,6 +466,7 @@ const add_bouns_readiness = async (req, res) => {
         bonus.NO_hours = formattedTime;
         bonus.date = date;
         bonus.name_who_added=name
+        bonus.note=note
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
@@ -497,7 +507,7 @@ const add_bouns_absence = async (req, res) => {
         const user_id = req.params.id;
         const bonusAmount = req.body.bonus;
         const date = req.body.date;
-
+        const note = req.body.note;
         const user = await User.findById(user_id);
         if (!user) {
             return res.status(404).send('not found');
@@ -510,7 +520,8 @@ const add_bouns_absence = async (req, res) => {
             NO_bouns: bonusAmount,
             NO_hours: formattedTime,
             date: date,
-            name_who_added:name
+            name_who_added:name,
+            note:note
         });
 
       
@@ -530,6 +541,7 @@ const add_bouns_absence = async (req, res) => {
         const award_id = req.params.award_id;
         const newBonusAmount = req.body.bonus;
         const date = req.body.date;
+      const note = req.body.note;
 
         const user = await User.findById(user_id);
         if (!user) {
@@ -548,6 +560,7 @@ const add_bouns_absence = async (req, res) => {
         bonus.NO_hours = formattedTime;
         bonus.date = date;
         bonus.name_who_added=name
+        bonus.note=note
 
         await user.save();
         res.status(200).send(`Bonus updated successfully for user ${user.FirstName}`);
